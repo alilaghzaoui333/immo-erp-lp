@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoERP | Solution Premium de Gestion Immobilière</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1.5s ease-in-out',
+                        'bounce': 'bounce 2s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        bounce: {
+                            '0%, 100%': { transform: 'translateY(-10%)' },
+                            '50%': { transform: 'translateY(0)' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600;
+            }
+            .btn-primary {
+                @apply bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:from-blue-700 hover:to-indigo-800 transform hover:-translate-y-1;
+            }
+            .card-hover {
+                @apply transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl;
+            }
+            .nav-link {
+                @apply text-gray-700 hover:text-indigo-600 font-medium transition;
+            }
+            .footer-link {
+                @apply text-gray-400 hover:text-white;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased">
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl animate-bounce">IE</div>
+                    <span class="text-2xl font-bold text-gray-800">Immo<span class="text-indigo-600">ERP</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="nav-link">Accueil</a>
+                    <a href="#features" class="nav-link">Fonctionnalités</a>
+                    <a href="#solutions" class="nav-link">Solutions</a>
+                    <a href="#pricing" class="nav-link">Tarifs</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="hidden md:block nav-link">Connexion</a>
+                    <button class="btn-primary">Démo gratuite</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <header class="relative pt-32 pb-40 bg-gradient-to-br from-blue-900 to-indigo-900 text-white overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-1/4 w-72 h-72 bg-blue-500 rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-float"></div>
+            <div class="absolute top-1/2 right-1/3 w-64 h-64 bg-indigo-500 rounded-full mix-blend-overlay filter blur-3xl opacity-20 animate-float animation-delay-2000"></div>
+        </div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h1 class="text-5xl md:text-6xl font-serif font-bold mb-6 leading-tight animate-fade-in">
+                <span class="text-gradient">Révolutionnez</span> votre gestion<br>immobilière avec ImmoERP
+            </h1>
+            <p class="text-xl md:text-2xl text-blue-100 mb-10 max-w-3xl mx-auto animate-fade-in animation-delay-300">
+                La solution tout-en-un premium pour optimiser, automatiser et simplifier la gestion de votre patrimoine immobilier.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in animation-delay-500">
+                <button class="btn-primary px-10">
+                    Essai gratuit <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+                <button class="bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-8 rounded-full border border-white/20 transition-all duration-300">
+                    <i class="fas fa-play-circle mr-2"></i> Voir la démo
+                </button>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-gray-50 to-transparent"></div>
+    </header>
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <p class="text-center text-gray-500 mb-8">Ils nous font confiance</p>
+            <div class="flex flex-wrap justify-center items-center gap-12 opacity-70">
+                <img src="https://via.placeholder.com/150x50?text=Client+1" alt="Client logo" class="h-8">
+                <img src="https://via.placeholder.com/150x50?text=Client+2" alt="Client logo" class="h-8">
+                <img src="https://via.placeholder.com/150x50?text=Client+3" alt="Client logo" class="h-8">
+                <img src="https://via.placeholder.com/150x50?text=Client+4" alt="Client logo" class="h-8">
+                <img src="https://via.placeholder.com/150x50?text=Client+5" alt="Client logo" class="h-8">
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-indigo-600 font-semibold">HAUT DE GAMME</span>
+                <h2 class="text-4xl font-serif font-bold mt-2 mb-4">Une solution premium pour professionnels exigeants</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">ImmoERP offre une expérience haut de gamme avec des fonctionnalités avancées, un design élégant et un support premium.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-8 card-hover">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mb-6">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Sécurité renforcée</h3>
+                    <p class="text-gray-600">Protection des données avec chiffrement de bout en bout et sauvegardes automatiques quotidiennes.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 card-hover">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mb-6">
+                        <i class="fas fa-headset text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Support premium</h3>
+                    <p class="text-gray-600">Accès prioritaire à notre équipe d'experts disponible 24/7 pour répondre à vos besoins.</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 card-hover">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mb-6">
+                        <i class="fas fa-rocket text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Performance optimale</h3>
+                    <p class="text-gray-600">Infrastructure haut débit garantissant des temps de réponse ultra-rapides même en période de pointe.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-indigo-600 font-semibold">FONCTIONNALITÉS</span>
+                <h2 class="text-4xl font-serif font-bold mt-2 mb-4">Découvrez notre panel de fonctionnalités</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Tout ce dont vous avez besoin pour gérer efficacement votre portefeuille immobilier.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mb-6">
+                        <i class="fas fa-home text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Gestion des biens</h3>
+                    <p class="text-gray-600 mb-4">Centralisez toutes les informations de vos biens immobiliers avec photos, documents et historiques.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Fiche détaillée par bien</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Gestion des documents</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Historique des modifications</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mb-6">
+                        <i class="fas fa-file-invoice-dollar text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Gestion locative</h3>
+                    <p class="text-gray-600 mb-4">Automatisez la gestion de vos locations avec suivi des paiements, quittances et états des lieux.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Génération automatique des quittances</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Alertes impayés</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Éditions des états des lieux</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mb-6">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Reporting & Analytics</h3>
+                    <p class="text-gray-600 mb-4">Tableaux de bord personnalisables et rapports détaillés pour piloter votre activité.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Indicateurs clés en temps réel</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Export des données en Excel/PDF</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Analyse de la rentabilité</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mb-6">
+                        <i class="fas fa-tools text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Gestion des travaux</h3>
+                    <p class="text-gray-600 mb-4">Planifiez et suivez l'ensemble des travaux et interventions sur vos biens.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Demandes d'intervention</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Devis et factures</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Calendrier des interventions</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mb-6">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Gestion des contacts</h3>
+                    <p class="text-gray-600 mb-4">Centralisez vos propriétaires, locataires et fournisseurs avec toutes leurs informations.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Fiche contact complète</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Historique des interactions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Communication intégrée</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 card-hover">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 mb-6">
+                        <i class="fas fa-mobile-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Application mobile</h3>
+                    <p class="text-gray-600 mb-4">Accédez à toutes les fonctionnalités depuis votre smartphone, même hors connexion.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Disponible iOS et Android</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Notifications push</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Signature électronique</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="solutions" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-indigo-600 font-semibold">SOLUTIONS</span>
+                <h2 class="text-4xl font-serif font-bold mt-2 mb-4">Nos solutions adaptées à votre activité</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Choisissez la solution qui correspond le mieux à vos besoins spécifiques.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-building text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Agences immobilières</h3>
+                    </div>
+                    <p class="text-gray-700 mb-6">Solution complète pour gérer votre portefeuille de biens, vos mandats, visites et transactions avec efficacité.</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Gestion des mandats et exclusivités</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Planification des visites</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Suivi des transactions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Tableau de bord commercial</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="text-indigo-600 font-semibold flex items-center">En savoir plus <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-home text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Propriétaires bailleurs</h3>
+                    </div>
+                    <p class="text-gray-700 mb-6">Simplifiez la gestion de votre patrimoine locatif avec des outils spécialement conçus pour les propriétaires.</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Gestion des locations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Suivi des loyers et charges</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Déclaration fiscale simplifiée</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Optimisation fiscale</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="text-indigo-600 font-semibold flex items-center">En savoir plus <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-hotel text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Résidences et copropriétés</h3>
+                    </div>
+                    <p class="text-gray-700 mb-6">Outil complet pour administrer efficacement les résidences et copropriétés avec transparence.</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Gestion des charges</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Assemblées générales</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Communication avec les résidents</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Documentation réglementaire</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="text-indigo-600 font-semibold flex items-center">En savoir plus <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-city text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Promoteurs immobiliers</h3>
+                    </div>
+                    <p class="text-gray-700 mb-6">Solution intégrée pour piloter vos projets immobiliers de la conception à la livraison.</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Gestion des lots et ventes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Suivi des réservations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Planification des travaux</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3"></i>
+                            <span>Tableau de bord projet</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="text-indigo-600 font-semibold flex items-center">En savoir plus <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="pricing" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-indigo-600 font-semibold">TARIFS</span>
+                <h2 class="text-4xl font-serif font-bold mt-2 mb-4">Des tarifs adaptés à votre structure</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Choisissez la formule qui correspond à vos besoins et à votre budget.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                    <div class="px-8 py-6 bg-gray-50">
+                        <h3 class="text-2xl font-bold text-gray-800">Starter</h3>
+                        <p class="text-gray-600 mt-2">Parfait pour les petits portefeuilles</p>
+                    </div>
+                    <div class="px-8 py-6 border-b border-gray-200">
+                        <div class="flex items-end">
+                            <span class="text-4xl font-bold">199</span>
+                            <span class="text-gray-500 ml-1 mb-1">DH/mois</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-2">Facturé annuellement</p>
+                    </div>
+                    <div class="px-8 py-6">
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>Jusqu'à 10 biens</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>Gestion locative de base</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>Support par email</span>
+                            </li>
+                            <li class="flex items-start text-gray-400">
+                                <i class="fas fa-times mt-1 mr-3"></i>
+                                <span>Application mobile</span>
+                            </li>
+                            <li class="flex items-start text-gray-400">
+                                <i class="fas fa-times mt-1 mr-3"></i>
+                                <span>Reporting avancé</span>
+                            </li>
+                        </ul>
+                        <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg transition">Commencer</button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform scale-105 card-hover border-2 border-indigo-500">
+                    <div class="px-8 py-6 bg-indigo-600 text-white">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-bold">Professional</h3>
+                                <p class="mt-2 opacity-90">Solution complète pour professionnels</p>
+                            </div>
+                            <span class="bg-white text-indigo-600 text-xs font-bold px-2 py-1 rounded-full">POPULAIRE</span>
+                        </div>
+                    </div>
+                    <div class="px-8 py-6 border-b border-gray-200">
+                        <div class="flex items-end">
+                            <span class="text-4xl font-bold">499</span>
+                            <span class="text-gray-500 ml-1 mb-1">DH/mois</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-2">Facturé annuellement</p>
+                    </div>
+                    <div class="px-8 py-6">
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>Jusqu'à 50 biens</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>Gestion locative complète</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>Support prioritaire</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>Application mobile</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>Reporting avancé</span>
+                            </li>
+                        </ul>
+                        <button class="w-full btn-primary">Choisir cette offre</button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                    <div class="px-8 py-6 bg-gray-50">
+                        <h3 class="text-2xl font-bold text-gray-800">Enterprise</h3>
+                        <p class="text-gray-600 mt-2">Solution sur mesure pour grands portefeuilles</p>
+                    </div>
+                    <div class="px-8 py-6 border-b border-gray-200">
+                        <div class="flex items-end">
+                            <span class="text-4xl font-bold">999</span>
+                            <span class="text-gray-500 ml-1 mb-1">DH/mois</span>
+                        </div>
+                        <p class="text-gray-500 text-sm mt-2">Facturé annuellement</p>
+                    </div>
+                    <div class="px-8 py-6">
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>Biens illimités</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>Toutes les fonctionnalités</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>Support 24/7</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>Formation personnalisée</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span>API et intégrations</span>
+                            </li>
+                        </ul>
+                        <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg transition">Nous contacter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <p class="text-gray-600">Vous avez des besoins spécifiques ? <a href="#" class="text-indigo-600 font-semibold">Contactez-nous</a> pour une solution sur mesure.</p>
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-indigo-600 font-semibold">TÉMOIGNAGES</span>
+                <h2 class="text-4xl font-serif font-bold mt-2 mb-4">Ce que disent nos clients marocains</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Découvrez comment ImmoERP a transformé leur gestion immobilière.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-8 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic mb-6">"ImmoERP est une solution révolutionnaire pour notre agence immobilière à Casablanca. Nous avons gagné en efficacité et en transparence."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Fatima Zahra</h4>
+                            <p class="text-gray-600 text-sm">Directrice, Agence CasaImmobilier</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic mb-6">"Grâce à ImmoERP, la gestion de mes biens locatifs à Rabat est devenue un jeu d'enfant. Je recommande vivement cette solution."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Yassine Benhida</h4>
+                            <p class="text-gray-600 text-sm">Propriétaire bailleur, Rabat</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic mb-6">"ImmoERP a transformé notre gestion de copropriété à Marrakech. Les résidents sont plus satisfaits et les tâches administratives sont simplifiées."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Client" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Sara El Mansouri</h4>
+                            <p class="text-gray-600 text-sm">Présidente du syndic, Résidence Marrakech</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-indigo-600 font-semibold">CONTACT</span>
+                <h2 class="text-4xl font-serif font-bold mt-2 mb-4">Prenez contact avec nous</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Une question ? Un projet ? Notre équipe vous répond sous 24h.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Formulaire de contact -->
+                <div class="bg-white rounded-xl shadow-md p-8 card-hover">
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Nom complet</label>
+                            <input type="text" id="name" name="name" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Téléphone (optionnel)</label>
+                            <input type="tel" id="phone" name="phone"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" required
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary w-full">
+                            Envoyer le message <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+
+                    <div id="formSuccess" class="hidden mt-6 p-4 bg-green-100 text-green-700 rounded-lg">
+                        Message envoyé avec succès ! Nous vous contacterons rapidement.
+                    </div>
+                </div>
+
+                <!-- Informations de contact + Maps -->
+                <div class="space-y-8">
+                    <div class="bg-white rounded-xl shadow-md p-8 card-hover">
+                        <h3 class="text-xl font-bold mb-6">Nos coordonnées</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-indigo-600 mt-1 mr-4"></i>
+                                <span>580 BD AL MASSIRA ETG 2 APT N 03, Nador (M) </span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-phone-alt text-indigo-600 mr-4"></i>
+                                <span>+212 522 123 456</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-envelope text-indigo-600 mr-4"></i>
+                                <span>contact@immoerp.ma</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-clock text-indigo-600 mr-4"></i>
+                                <span>Lun-Ven: 9h00 - 18h00</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.080510479812!2d-2.931376!3d35.16488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd78643c2f30c56f%3A0x450226c1eecb20b!2sNeoTech%20Consulting!5e0!3m2!1sfr!2sma!4v1713874700055!5m2!1sfr!2sma"
+                            width="100%"
+                            height="300"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            class="rounded-lg"
+                        ></iframe>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">ImmoERP</h3>
+                    <p class="text-gray-400">Révolutionnez votre gestion immobilière avec notre solution premium.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Liens utiles</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link">Accueil</a></li>
+                        <li><a href="#features" class="footer-link">Fonctionnalités</a></li>
+                        <li><a href="#solutions" class="footer-link">Solutions</a></li>
+                        <li><a href="#pricing" class="footer-link">Tarifs</a></li>
+                        <li><a href="#contact" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Contact</h3>
+                    <p class="text-gray-400">Adresse : 123 Rue Immobilière, Nador, Maroc</p>
+                    <p class="text-gray-400">Email : contact@immoerp.ma</p>
+                    <p class="text-gray-400">Téléphone : +212 6 12 34 56 78</p>
+                </div>
+            </div>
+            <div class="mt-12 text-center text-gray-400">
+                <p>&copy; 2025 ImmoERP. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+<script src="/assets/js/contact.js"></script>
+
+</html>
